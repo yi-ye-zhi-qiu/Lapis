@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<style type="text/css">
+
+.buttonload{
+  background-color: none;
+  border: none;
+  color: white;
+  padding: 12px 16px;
+  font-size: 50px;
+  text-shadow: 3px 2px 1px #9575CD;
+}
+
+#my_dataviz, #curtain{
+  height: 650px;
+  width: 490px;
+}
+
+#curtain {
+  position: relative;
+  top: -650px;
+  left: 1040px;
+  font-size: 15px;
+}
+
+.container .subnote {
+  color: #B388FF;
+  font-size: 12px;
+  padding: 12 px;
+  border: none;
+  border-radius: 4px;
+  background: #EDE7F6;
+}
+
+input.radio{
+  background-color:#ffff00;
+}
+
+.container .title{
+ font-size: 25px;
+}
+
+.container {
+float: left
+}
+
+body{ 
+ color: white;
+ background: #EDE7F6;
+ font-family: sans-serif;
+}
+
+svg {
+  font: 10px sans-serif;
+  fill: white;
+  stroke-width: 1px;
+  shape-rendering: crispEdges;
+}
+
+.axis path,
+.axis line {
+  fill: white;
+  stroke: white;
+}
+
+path.domain{
+  stroke: lightgrey;
+}
+
+.y .tick line {
+  stroke: white;
+}
+
+input[type=radio] {
+  position: absolute;
+  visibility: hidden;
+  display: none;
+}
+
+label {
+  color: #EDE7F6;
+  display: inline-block;
+  cursor: pointer;
+  font-weight: 100;
+  padding: 5px 20px;
+  
+}
+
+input[type=radio]:checked + label{
+  color: #B388FF;
+  background: #EDE7F6
+}
+
+label + input[type=radio] + label{
+  border-left: solid 0px #EDE7F6;
+}
+
+.radio-group{
+  border: solid 1px #7C4DFF;
+  display: inline-block;
+  margin: 10px;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+</style>
+<body style="background-color: #212121">
+  
+  <div style = "background-color: #212121"><br><br></div>
+  <div style = "background-color: #424242">
+  
+  <div id="my_dataviz">
+  <script src="https://d3js.org/d3.v5.min.js"></script>
+  <?!= HtmlService.createHtmlOutputFromFile("orchardchart").getContent() ?>
+  
+  <script>
+    window.onload = function() { 
+    
+      google.script.run
+        .withSuccessHandler(drawChart)
+        .getChartData()
+    
+    }
+  
+  </script>
+  
+  </div>
+  </div>
+  <div id ="curtain" class="container" style="background-color: #616161">
+    <br><br>
+      <center> <span class="title"> lorem ipsum </span><br>
+        <form>
+          <div class="radio-group" id="backdrop" class="container">
+          <input type="radio" id="option-one" name="selector" value="stacked" checked><label for="option-one">stacked </label>
+          <input type="radio" id="option-two" name="selector" value="grouped"><label for="option-two">grouped </label>
+          <input type="radio" id="option-three" name="selector" value="waterfall"><label for="option-three">waterfall </label>
+          </div>
+       </form>
+       
+     <script>
+     
+     function updateButton(email, button) { 
+       button.value = 'yum thanks!'+ email;
+     }
+     
+     </script>
+       
+     <input class="subnote" id="button1" type="button" value="click to get more data" onclick="google.script.run.withSuccessHandler(updateButton).withUserObject(this).callWithHTML()">
+     <br><br><br>
+     The [most recent y category] has <div id="mostRecent" class="buttonload"><i class="fa fa-circle-o-notch fa-spin"></i></div>
+    </center>
+ </div>
+ 
+</body>
